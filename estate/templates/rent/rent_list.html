@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    {% for rent in rents %}
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-4">
+                <img src="{{ rent.thumbnail.url }}" class="card-img-top" alt="{{ rent.title }}">
+            </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ rent.title }}, {{ rent.city }}, {{ rent.price }} руб./месяц, {{ rent.area }} кв.м</h5>
+                    <div class="card-subtitle">{{ rent.author.username }}</div>
+                    <p class="card-text">{{ rent.full_description }}</p>
+                    <a href="{% url 'rents_by_category' rent.category.slug %}" class="btn btn-primary">{{ rent.category.title }}</a>
+                    <a href="{{ rent.get_absolute_url }}">Подробнее</a>
+                  </div>
+                </div>
+            </div>
+      </div>
+    {% endfor %}
+{% endblock %}
