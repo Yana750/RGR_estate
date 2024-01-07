@@ -85,11 +85,7 @@ async def process_name(message: Message, state: FSMContext) -> None:
             resize_keyboard=True,
         ),
     )
-    #global username
-    #username = message.from_user.id
-    #cursor = conn.cursor()
-    #cursor.execute("""INSERT INTO Requests(username) VALUES (%s)""", (username))
-    #conn.commit()
+
 
 @my_router.message(Form.mail_rass, F.text.casefold() == "yes")
 async def process_like_write_bots(message: Message, state: FSMContext) -> None:
@@ -101,9 +97,7 @@ async def process_like_write_bots(message: Message, state: FSMContext) -> None:
     )
 
     await message.answer("Хотите ли посмотреть список доступных помещений /list_rent")
-    #cursor = conn.cursor()
-    #cursor.execute("""INSERT INTO Requests(mailing) VALUES (%s)""", {html.quote(message.text)} )
-    #conn.commit()
+
 
 @my_router.message(Form.mail_rass, F.text.casefold() == "no")
 async def process_dont_like_write_bots(message: Message, state: FSMContext) -> None:
@@ -114,9 +108,7 @@ async def process_dont_like_write_bots(message: Message, state: FSMContext) -> N
         reply_markup=ReplyKeyboardRemove(),
     )
     await message.answer("Хотите ли посмотреть список доступных помещений /list_rent")
-    #cursor = conn.cursor()
-    #cursor.execute("""INSERT INTO Requests(mailing) VALUES (%s)""", {html.quote(message.text)} )
-    #conn.commit()
+
 
 @my_router.message(Form.mail_rass)
 async def process_unknown_write_bots(message: Message) -> None:
@@ -130,11 +122,6 @@ async def process_name(message: Message, state: FSMContext) -> None:
         "Какой тип помещения хотите арендовать: квартира или комната?",
         reply_markup=ReplyKeyboardRemove(),
     )
-
-    #cursor = conn.cursor()
-    #cursor.execute("""INSERT INTO Requests(city) VALUES (%s)""", {html.quote(message.text)})
-    ##conn.commit() метод фиксирует текущую транзакцию.
-    #conn.commit()
 
 @my_router.message(Form.filter_category)
 async def process_name(message: Message, state: FSMContext) -> None:
