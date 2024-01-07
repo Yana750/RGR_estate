@@ -8,9 +8,6 @@ class Form(StatesGroup):
     add_filter =State()
     Results = State()
 
-class UserAgreement(StatesGroup):
-    is_agree = State()
-
 
 if __name__ == '__main__':
     print(Form.all())
