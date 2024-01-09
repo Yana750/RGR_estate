@@ -1,7 +1,7 @@
 {% extends 'main.html' %}
 
 {% block content %}
-        <img src={{ rents.thumbnail.url }} alt={{ rents.title }} width="250"/>
+        <img src={{ rents.thumbnails.url }} alt={{ rents.title }} width="250"/>
         <strong>{{ rents.title }}</strong>
         <p>{{ rents.city }}, {{rents.location}}</p>
         <p>{{ rents.floor }} этаж, {{rents.area}} кв.м, {{rents.price}} руб./месяц, {{rents.status}}</p>

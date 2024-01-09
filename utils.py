@@ -5,8 +5,8 @@ class Form(StatesGroup):
     filter_city = State()
     filter_category = State()
     mail_rass = State()
-    add_filter =State()
-    Results = State()
+    Send_msg_mail = State()
+    cancel = State()
 
 
 if __name__ == '__main__':
