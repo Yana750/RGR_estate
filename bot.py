@@ -208,8 +208,10 @@ async def send_message():
         cursor = conn.cursor()
         cursor.execute("""SELECT username FROM Estate_db.Requests WHERE mailing='yes' ORDER BY id DESC LIMIT 1""")
         user_id = cursor.fetchone()
+        trimmed = ','.join(map(str, user_id)).strip(',')
+        print(trimmed)
 
-        await bot.send_message(chat_id=user_id, text=message, parse_mode=ParseMode.MARKDOWN) #рассылает именно по этому 5554... id, нужно сделать так, чтобы вытаскивалась из бд username
+        await bot.send_message(chat_id=trimmed, text=message, parse_mode=ParseMode.MARKDOWN) #рассылает именно по этому 5554... id, нужно сделать так, чтобы вытаскивалась из бд username
 
 
 @my_router.message(Command('send_messages'))
