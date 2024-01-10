@@ -139,7 +139,7 @@ async def show_summary(message: Message, data: Dict[str, Any], positive: bool = 
     text += (
         f"хотите арендовать в {html.quote(city)}, в помещении типа - {html.quote(category)}, и на рассылку вы подписались? {html.quote(mailing)}"
         if positive
-        else "иначе я Вас не понял..."
+        else "иначе я Вас не понял... Напишите команду /cancel"
     )
     await message.answer(text=text, reply_markup=ReplyKeyboardRemove())
 
@@ -153,7 +153,6 @@ async def show_summary(message: Message, data: Dict[str, Any], positive: bool = 
 async def get_condition_from_db(message: Message, data: Dict[str, Any]) -> None:
         await message.answer("Вот список доступных по Вашим условиям:")
         cursor = conn.cursor()
-        #cursor.execute("SELECT * FROM app_rent, Requests WHERE app_rent.city = Requests.(%s) AND app_rent.category = Requests.(%s)", {html.quote(city)}, {html.quote(category)})
         cursor.execute("""SELECT a.title, a.city, a.location, a.area, a.floor, a.room, a.price, a.full_description, a.status, r.city, r.category, c.title
                        FROM Estate_db.Requests r, Estate_db.app_rent a, Estate_db.app_categories c
                        WHERE r.city = a.city AND c.title = r.category AND a.status = 'free' 
@@ -170,13 +169,6 @@ async def get_condition_from_db(message: Message, data: Dict[str, Any]) -> None:
             await message.answer("По Вашему запросу такие объявления отсутствуют")   
             cursor.close()
         await message.answer("рассылка по команде /cancel")
-
-#@my_router.message(Command("Send_msg_mail"))
-#def telegram_bot_sendtext(bot_message):
-#    bot_token = os.environ.get("TOKEN")
-#    bot_chatID = os.environ.get("bot_chatID")
-#    send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=HTML&text=' + bot_message
-#    response = request.get(send_text)
 
 def get_message():
     try:
@@ -211,7 +203,7 @@ async def send_message():
         trimmed = ','.join(map(str, user_id)).strip(',')
         print(trimmed)
 
-        await bot.send_message(chat_id=trimmed, text=message, parse_mode=ParseMode.MARKDOWN) #рассылает именно по этому 5554... id, нужно сделать так, чтобы вытаскивалась из бд username
+        await bot.send_message(chat_id=trimmed, text=message, parse_mode=ParseMode.MARKDOWN) 
 
 
 @my_router.message(Command('send_messages'))
