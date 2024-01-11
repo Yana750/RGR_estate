@@ -160,7 +160,8 @@ async def get_condition_from_db(message: Message, data: Dict[str, Any]) -> None:
                        )
         
         result = cursor.fetchall()
-        if result != '':
+        if result:
+            result != ''
             formatted_text = ' '
             for row in result:
                 formatted_text = f"Название: {row[0]}\n\n Город: {row[1]}, Улица: {row[2]}, Площадь: {row[3]} кв.м., Этаж: {row[4]}, Комната: {row[5]}\n Цена: {row[6]}\n\n Описание: {row[7]}\n\n Доступность помещения: {row[8]}"
@@ -177,7 +178,7 @@ def get_message():
                                              user='root',
                                              password='root')
 
-        sql_select_query = """select text from messages order by rand() limit 1"""
+        sql_select_query = ("""SELECT text FROM Estate_db.messages ORDER BY rand() LIMIT 1""")
         cursor = connection.cursor()
         cursor.execute(sql_select_query)
         records = cursor.fetchall()
